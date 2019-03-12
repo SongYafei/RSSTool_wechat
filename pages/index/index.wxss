@@ -4,8 +4,9 @@
 }
 
 .title {
+  font-size: 32rpx;
+  font-weight: bold;
   padding: 0 24rpx;
-  font-size: 48rpx;
 }
 
 .info-box {
@@ -26,14 +27,25 @@
 }
 
 .rss-item {
-  font-size: 24rpx;
-  padding: 12rpx 36rpx 12rpx 24rpx;
+  padding: 12rpx 12rpx 12rpx 24rpx;
   background-color: #fff; 
   position: relative;
 }
 
+.rss-item-title {
+  font-size: 30rpx;
+  position: relative;
+  font-weight: bold
+}
+
+.rss-item-des {
+  font-size: 24rpx;
+  padding: 12rpx 36rpx 12rpx 0rpx;
+  position: relative;
+}
+
 .rss-item + .rss-item {
-  margin-top: 24rpx;
+  margin-top: 10rpx;
 }
 
 .rss-item text {

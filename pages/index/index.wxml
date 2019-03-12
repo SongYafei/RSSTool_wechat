@@ -2,7 +2,7 @@
 <!-- <import src="../../wxParse/wxParse.wxml"/>  -->
 <view class="container" wx:if='{{!!author}}'>
   <view class='title'>
-    <image class='avatar' mode='aspectFit' src='{{favicon}}'></image>{{author}}
+    {{author}}
   </view>
   <view class='info-box'>
     <text>{{copyright}}</text>
@@ -17,7 +17,13 @@
     wx:for-index="idx"
     wx:for-item="itemName"
     wx:key="unique">
-    <text>{{itemName.title}}</text>
+    <view class='rss-item-title'>
+      <text>{{itemName.title.text}}</text>
+    </view>
     <view class='right-arrow'></view>
+    <view class='rss-item-des'>
+      <text>{{itemName.description.text}}</text>
+    </view>
+    
   </view>
 </view>
