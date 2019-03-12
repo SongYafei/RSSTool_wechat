@@ -2,7 +2,7 @@
 //获取应用实例
 
 const util = require('../../utils/util.js');
-const xmlParse = require('../../xmllib/dom-parser.js')
+const xml2json = require('../../xmllib/xml2json.js')
 const app = getApp()
 
 
@@ -11,7 +11,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    author: '',     // 源名称
+    author: 'cnBeta',     // 源名称
     favicon: '',    // 源logo
     copyright: '',  // 源版权
     pubDate: '',    // 源更新时间
@@ -55,27 +55,19 @@ Page({
         'content-type': 'application/xml' // 默认值
       },
       success: function (res) {
-        // const item = res.data.data.rss.channel[0].item[0].description[0];
-        // const item = res.data.data..rss.channel.item[0].description;
-        console.log('res:', res.data.channnle)
 
-        var jasonRet = xmlParse.xmlToJSON.parseString(res.toString())
-        console.log('sss',jasonRet)
+        var rssData = xml2json(res.data).rss.channel;//.channel.item.slice(0, 50);
+        console.log('rssdata:', rssData)
         
-        let rssData = {};
-        
-        const rssData1 = res.channel;
-        console.log('res rssData: ', rssData1);
 
         const { title, link, lastBuildDate = '', copyright = '', pubDate = '' } = rssData;
 
-        
         that.setData({
-          rssData,
-         // author: title,
-          copyright,
-          // favicon,
-          pubDate: (lastBuildDate || pubDate) ? util.formatDate("yyyy-MM-dd HH:mm:ss", lastBuildDate || pubDate) : '',
+          author: title,     // 源名称
+          //favicon: '',    // 源logo
+          copyright: copyright,  // 源版权
+          pubDate: (lastBuildDate || pubDate) ? util.formatDate("yyyy-MM-dd HH:mm:ss", lastBuildDate || pubDate) : '',    // 源更新时间
+          rssData: rssData,    // 源数据
         });
 
         wx.hideLoading();
@@ -85,6 +77,8 @@ Page({
     });
     
   },
+
+  
 
 
   getUserInfo: function(e) {
