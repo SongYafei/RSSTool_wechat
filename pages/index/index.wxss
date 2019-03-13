@@ -4,9 +4,10 @@
 }
 
 .title {
-  font-size: 32rpx;
+  font-size: 34rpx;
   font-weight: bold;
   padding: 0 24rpx;
+  color: #003366;
 }
 
 .info-box {
@@ -17,8 +18,7 @@
 }
 
 .avatar {
-  width: 31rpx;
-  height: 31rpx;
+  width: 200rpx;
   margin-right: 12rpx;
 }
 
@@ -30,6 +30,7 @@
   padding: 12rpx 12rpx 12rpx 24rpx;
   background-color: #fff; 
   position: relative;
+  border-bottom: 1rpx solid #F3F3F3;
 }
 
 .rss-item-title {

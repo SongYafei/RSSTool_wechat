@@ -1,0 +1,10 @@
+var removetxt = function (inputtext){
+  var pos = inputtext.search("<strong>阅读全文</strong>");
+  var ret = inputtext.substring(0, pos) + "</a>" ;
+  //console.log(ret)
+  return ret;
+}
+
+module.exports = {
+  removetxt: removetxt
+};

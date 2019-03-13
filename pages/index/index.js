@@ -26,7 +26,7 @@ Page({
   onLoad: function () {
 
     // 默认值
-    let rssUrl = 'https://service-ox5moi4m-1258237701.gz.apigw.tencentcs.com/test/cnbetafeed';
+    let rssUrl = 'https://www.cnbeta.com/backend.php';
 
     this.getRss(rssUrl);
   },
@@ -49,11 +49,11 @@ Page({
         var rssData = xml2json(res.data).rss.channel;//.channel.item.slice(0, 50);
         console.log('rssdata:', rssData);
 
-        const {description, link, lastBuildDate = '', copyright = '', pubDate = '' } = rssData;
+        const {description, link, lastBuildDate = '', copyright = '', pubDate = '',image='' } = rssData;
 
         that.setData({
-          author: description.text,     // 源名称
-          //favicon: '',    // 源logo
+          author: description.text.replace('cnBeta.COM -',''),     // 源名称
+          favicon: 'https://images.weserv.nl/?url='+image.url.text,    // 源logo
           copyright: copyright.text,  // 源版权
           pubDate: (lastBuildDate || pubDate) ? util.formatDate("yyyy-MM-dd HH:mm:ss", lastBuildDate || pubDate.text) : '',    // 源更新时间
           rssData: rssData,    // 源数据

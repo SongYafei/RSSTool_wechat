@@ -26,16 +26,16 @@ Page({
     var linkurl = link.text.substring(link.text.lastIndexOf('/'), link.text.length);
     linkurl = 'https://m.cnbeta.com/view' + linkurl
 
-    console.log(linkurl)
+    console.log(link.text)
 
     wx.request({
-      url: linkurl,
+      url: link.text,
       data: {},
       header: {
         'content-type': 'application/html' // 默认值
       },
       success: function (res) {
-        console.log(res.data)
+        //console.log(res.data)
         // let domainReg = new RegExp('https://static.cnbetacdn.com', 'g');
         // var sid='826855'
         // let article = {

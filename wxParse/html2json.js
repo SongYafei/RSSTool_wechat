@@ -120,6 +120,10 @@ function html2json(html, bindName) {
                         //  value = value.join("")
                         node.styleStr = value;
                     }
+                    if (name =='data-src') {
+                      node.dataSrc = value ;
+
+                    }
                     if (value.match(/ /)) {
                         value = value.split(' ');
                     }
@@ -148,6 +152,10 @@ function html2json(html, bindName) {
             if (node.tag === 'img') {
                 node.imgIndex = results.images.length;
                 var imgUrl = node.attr.src;
+                if ( typeof(imgUrl) == "undefined" ) {
+                  imgUrl = node.dataSrc;
+
+                }
                 if (imgUrl[0] == '') {
                     imgUrl.splice(0, 1);
                 }
