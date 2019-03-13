@@ -15,6 +15,7 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+
     const rssData = wx.getStorageSync('rssData') || {};
     const author = rssData.title || '';
 
@@ -24,32 +25,37 @@ Page({
     console.log(link.text)
 
     var linkurl = link.text.substring(link.text.lastIndexOf('/'), link.text.length);
-    linkurl = 'https://m.cnbeta.com/view' + linkurl
+    linkurl = 'https://m.cnbeta.com/view' + linkurl ;
 
-    console.log(link.text)
+    wx.setStorageSync('linkurl', linkurl) ;
 
+    console.log(link.text) ;
+
+    this.getArticle(link.text) ;
+    
+
+  },
+
+  getArticle:function(url) {
+    wx.showLoading({
+      title: '加载中...',
+    });
+    var that = this ;
+    console.log("getArticle");
     wx.request({
-      url: link.text,
+      url: url,
       data: {},
       header: {
         'content-type': 'application/html' // 默认值
       },
       success: function (res) {
-        //console.log(res.data)
-        // let domainReg = new RegExp('https://static.cnbetacdn.com', 'g');
-        // var sid='826855'
-        // let article = {
-        //   sid,
-        //   source: $('.article-byline span a').html() || $('.article-byline span').html(),
-        //   summary: $('.article-summ p').html(),
-        //   content: $('.articleCont').html().replace(styleReg.reg, styleReg.replace).replace(scriptReg.reg, scriptReg.replace).replace(domainReg, serverAssetPath),
-        // };
-        // console.log(article)
-        wxParse.wxParse('article','html',res.data, that, 5)
+       // console.log(res.data)
+        wxParse.wxParse('article', 'html', res.data, that, 5)
+
+        wx.stopPullDownRefresh();
+        wx.hideLoading();
       }
     });
-    
-
   },
 
   /**
@@ -84,7 +90,8 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    const linkurl = wx.getStorageSync('linkurl') || {};
+    this.getArticle(linkurl);
   },
 
   /**

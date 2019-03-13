@@ -81,7 +81,7 @@ Page({
       rssData: {},    // 源数据
     });
     
-    let rssUrl = 'https://service-ox5moi4m-1258237701.gz.apigw.tencentcs.com/test/cnbetafeed';
+    let rssUrl = 'https://www.cnbeta.com/backend.php';
     that.getRss(rssUrl);
   },
   getUrl: function (index) {

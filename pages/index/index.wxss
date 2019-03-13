@@ -4,10 +4,10 @@
 }
 
 .title {
-  font-size: 34rpx;
+  font-size: 24rpx;
   font-weight: bold;
   padding: 0 24rpx;
-  color: #003366;
+  color: #666;
 }
 
 .info-box {
