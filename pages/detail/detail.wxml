@@ -1,0 +1,7 @@
+<!-- wxml -->
+<!-- 指向微信公众平台首页的web-view -->
+<import src="../../wxParse/wxParse.wxml" />
+<view class="container">
+  <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
+</view>
+

@@ -21,7 +21,7 @@ Page({
   bindViewTap: function() {
     wx.navigateTo({
       url: '../logs/logs'
-    })
+    });
   },
   onLoad: function () {
 
@@ -47,7 +47,7 @@ Page({
       success: function (res) {
 
         var rssData = xml2json(res.data).rss.channel;//.channel.item.slice(0, 50);
-        console.log('rssdata:', rssData)
+        console.log('rssdata:', rssData);
 
         const {description, link, lastBuildDate = '', copyright = '', pubDate = '' } = rssData;
 
@@ -60,7 +60,7 @@ Page({
         });
 
         wx.hideLoading();
-        wx.stopPullDownRefresh()
+        wx.stopPullDownRefresh();
 
         wx.setStorageSync('rssData', rssData);
       }
@@ -79,19 +79,22 @@ Page({
       copyright: '',  // 源版权
       pubDate: '',    // 源更新时间
       rssData: {},    // 源数据
-    })
+    });
     
     let rssUrl = 'https://service-ox5moi4m-1258237701.gz.apigw.tencentcs.com/test/cnbetafeed';
-    that.getRss(rssUrl)
+    that.getRss(rssUrl);
+  },
+  getUrl: function (index) {
+    return this.data.rssData.item[index].link.text;
   },
   // 点击跳转至文章详情页
   handleRssItemTap: (event) => {
     const rssItemData = event.currentTarget.dataset.rssItemData;
     const favicon = event.currentTarget.dataset.rssItemFavicon;
-    console.log(event)
-    // wx.navigateTo({
-    //   url: `../detail/detail?id=${rssItemData}&favicon=${favicon}`,
-    // });
+    console.log(event);
+    wx.navigateTo({
+      url: `../detail/detail?id=${rssItemData}`,
+    });
   },
   getUserInfo: function(e) {
     console.log(e)

@@ -1,12 +1,13 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/detail/detail"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#0061b2",
     "navigationBarTitleText": "cnBeta News",
-    "navigationBarTextStyle":"white"
+    "navigationBarTextStyle": "white"
   }
 }
