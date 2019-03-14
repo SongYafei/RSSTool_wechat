@@ -8,6 +8,7 @@
   <view class='info-box'>
     <text>{{copyright}}</text>
     <text>{{pubDate}}</text>
+    <text class='yafei'>created by@Yafei</text>
   </view>
   <view
     class='rss-item'

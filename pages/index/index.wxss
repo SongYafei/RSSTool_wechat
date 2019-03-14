@@ -17,6 +17,10 @@
   margin: 24rpx 0;
 }
 
+.yafei {
+  font-style: italic;
+}
+
 .avatar {
   width: 200rpx;
   margin-right: 12rpx;
