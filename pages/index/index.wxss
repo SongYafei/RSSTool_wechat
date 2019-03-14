@@ -35,6 +35,7 @@
 
 .rss-item-title {
   font-size: 30rpx;
+  padding: 12rpx 12rpx 12rpx 0rpx;
   position: relative;
   font-weight: bold;
   color: #003366;
@@ -42,7 +43,7 @@
 
 .rss-item-des {
   font-size: 24rpx;
-  padding: 12rpx 36rpx 12rpx 0rpx;
+  padding: 12rpx 12rpx 12rpx 0rpx;
   position: relative;
   color: #666;
   line-height: 36rpx;
