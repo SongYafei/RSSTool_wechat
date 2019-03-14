@@ -45,6 +45,7 @@
   padding: 12rpx 36rpx 12rpx 0rpx;
   position: relative;
   color: #666;
+  line-height: 36rpx;
 }
 
 .rss-item + .rss-item {

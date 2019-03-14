@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <!-- <import src="../../wxParse/wxParse.wxml"/>  -->
 <wxs src="index.wxs" module="index" />
-<view class="container" wx:if='{{!!author}}'>
+<view class="container" wx:if='{{favicon}}'>
   <view class='title'>
    <image class='avatar' mode='widthFix' src='{{favicon}}'></image>{{author}}
   </view>

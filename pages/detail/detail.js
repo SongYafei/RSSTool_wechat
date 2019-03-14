@@ -1,6 +1,6 @@
 // pages/detail.js
 
-var wxParse = require('../../wxParse/wxParse.js');
+const xml2json = require('../../xmllib/xml2json.js')
 
 Page({
 
@@ -8,6 +8,11 @@ Page({
    * 页面的初始数据
    */
   data: {
+    title:'',
+    author:'',
+    pubTime:'',
+    summary:'',
+    article:'',
   },
 
   /**
@@ -29,9 +34,9 @@ Page({
 
     wx.setStorageSync('linkurl', linkurl) ;
 
-    console.log(link.text) ;
+    console.log(linkurl) ;
 
-    this.getArticle(link.text) ;
+    this.getArticle(linkurl) ;
     
 
   },
@@ -50,7 +55,70 @@ Page({
       },
       success: function (res) {
        // console.log(res.data)
-        wxParse.wxParse('article', 'html', res.data, that, 5)
+
+        var regTitle = new RegExp("<title>([\\s\\S]*?)...............</title>","g") ;
+        var title = regTitle.exec(res.data) ;
+        if( title != null){
+          console.log(title[1]);
+          that.setData({
+            title:title[1],
+          });
+        }
+        
+
+        var regTime = new RegExp('<time class="time">([\\s\\S]*?)</time>', "g");
+        var time = regTime.exec(res.data);
+        if (time != null) {
+          console.log(time[1]);
+          that.setData({
+            pubTime: time[1],
+          });
+        }
+
+        var regAuthor = new RegExp('<span><a href=".*?" target="_blank"><span>(.*?)</span></a>&nbsp;&nbsp;</span>', "g");
+        var author = regAuthor.exec(res.data);
+        if (author != null) {
+          console.log(author[1]);
+          that.setData({
+            author: author[1],
+          });
+        }
+
+        var regSum = new RegExp('<div class="article-summ"><b>...</b>([\\s\\S]*?)</div>', "g");
+        var summary = regSum.exec(res.data);
+        if (summary != null) {
+          console.log(summary[1]);
+          that.setData({
+            summary: '摘要：' + summary[1],
+          });
+        }
+
+        var regTopic = new RegExp('<div class="article-topic">([\\s\\S]*?)</div>', "g");
+        var topic = regTopic.exec(res.data);
+        if(topic != null){
+          res.data = res.data.replace(topic[0], "")
+        }
+        
+       // console.log(res.data);
+        
+        var regContent = new RegExp('<div class="articleCont" id="artibody">([\\s\\S]*?)</div>', "g");
+        var content = regContent.exec(res.data);
+        if (content != null) {
+          console.log(content[1]);
+
+          var regImgstyle = new RegExp('<img', "g");
+          var article = content[1].replace(regImgstyle, '<img style="max-width:100%;height:auto;margin-left:-24px;" '); //防止图片过大 ;
+
+          var regImgurl = new RegExp('https://static.cnbetacdn.com', "g");
+          article = article.replace(regImgurl, "https://images.weserv.nl/?url=https://static.cnbetacdn.com")
+
+          var regPstyle = new RegExp('<p', "g");
+          article = article.replace(regPstyle, '<p style="margin-top:24px;"');
+
+          that.setData({
+            article: article,
+          });
+        }
 
         wx.stopPullDownRefresh();
         wx.hideLoading();
