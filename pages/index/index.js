@@ -16,11 +16,19 @@ Page({
     copyright: '',  // 源版权
     pubDate: '',    // 源更新时间
     rssData: {},    // 源数据
+    logoloadfin:'',
   },
   //事件处理函数
   bindViewTap: function() {
     wx.navigateTo({
       url: '../logs/logs'
+    });
+  },
+  onLogoLoad: function(e) {
+    const that = this ;
+    console.log("lalallalalalal");
+    that.setData({
+      logoloadfin:'true',
     });
   },
   onLoad: function () {
@@ -59,6 +67,10 @@ Page({
           rssData: rssData,    // 源数据
         });
 
+        that.setData({
+          logoloadfin: 'true',
+        });
+
         wx.hideLoading();
         wx.stopPullDownRefresh();
 
@@ -79,6 +91,7 @@ Page({
       copyright: '',  // 源版权
       pubDate: '',    // 源更新时间
       rssData: {},    // 源数据
+      logoloadfin:'',
     });
     
     let rssUrl = 'https://www.cnbeta.com/backend.php';
