@@ -122,7 +122,7 @@ Page({
           var article = content[1].replace(regImgstyle, '<img style="max-width:100%;height:auto;margin-left:-24px;" '); //防止图片过大 ;
 
           var regImgurl = new RegExp('https://static.cnbetacdn.com', "g");
-          article = article.replace(regImgurl, "https://images.weserv.nl/?url=https://static.cnbetacdn.com")
+          article = article.replace(regImgurl, "https://images.weserv.nl/?url=http://static.cnbetacdn.com")
 
           var regPstyle = new RegExp('<p style="', "g");
           article = article.replace(regPstyle, '<p class="textattr" style="margin-top:24px;');
@@ -174,6 +174,15 @@ Page({
    */
   onPullDownRefresh: function () {
     const linkurl = wx.getStorageSync('linkurl') || {};
+    const that = this ;
+    that.setData({
+      linkurl: '',
+      title: '',
+      author: '',
+      pubTime: '',
+      summary: '',
+      article: '',
+    });
     this.getArticle(linkurl);
   },
 

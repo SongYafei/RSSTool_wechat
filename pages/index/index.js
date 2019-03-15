@@ -12,7 +12,7 @@ Page({
    */
   data: {
     author: '',     // 源名称
-    favicon: '',    // 源logo
+    favicon: 'cnbetalogo.png',    // 源logo
     copyright: '',  // 源版权
     pubDate: '',    // 源更新时间
     rssData: {},    // 源数据
@@ -86,7 +86,7 @@ Page({
 
         that.setData({
           author: description.text.replace('cnBeta.COM -',''),     // 源名称
-          favicon: 'https://images.weserv.nl/?url='+image.url.text,    // 源logo
+         // favicon: 'https://images.weserv.nl/?url='+image.url.text,    // 源logo
           copyright: copyright.text,  // 源版权
           pubDate: (lastBuildDate || pubDate) ? util.formatDate("yyyy-MM-dd HH:mm:ss", lastBuildDate || pubDate.text) : '',    // 源更新时间
           rssData: rssData,    // 源数据

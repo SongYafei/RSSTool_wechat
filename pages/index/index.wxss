@@ -22,7 +22,8 @@
 }
 
 .avatar {
-  width: 200rpx;
+  width: 186rpx;
+  height: 46rpx;
   margin-right: 12rpx;
 }
 
