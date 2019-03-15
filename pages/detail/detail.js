@@ -15,29 +15,6 @@ Page({
     summary:'',
     article:'',
   },
-  /*
-  页面转发
-  */
-  onShareAppMessage: function (res) {
-
-      console.log("onShareAppMessage")
-      return {
-        title: title,
-        path: '/pages/detail?url=' + linkurl,
-        success: function (res) {
-          // 转发成功
-          wx.showToast({
-            title: '分享成功',
-            icon: 'none'
-          })
-        },
-        fail: function (res) {
-          // 转发失败
-        }
-      }
-    
-  }
-  ,
 
   /**
    * 生命周期函数--监听页面加载
@@ -100,7 +77,6 @@ Page({
             title:title[1],
           });
         }
-        
 
         var regTime = new RegExp('<time class="time">([\\s\\S]*?)</time>', "g");
         var time = regTime.exec(res.data);
@@ -211,7 +187,18 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function (res) {
+
+    const that = this;
+
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target);
+    }
+    return {
+      title: 'cnBeta最新资讯',
+      path: '/pages/index/index?url='+that.data.linkurl,
+    }
 
   }
 })

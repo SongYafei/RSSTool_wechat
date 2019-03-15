@@ -24,6 +24,23 @@ Page({
       url: '../logs/logs'
     });
   },
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function (res) {
+
+    const that = this;
+
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target);
+    }
+    return {
+      title: 'cnBeta最新资讯',
+      //path: '/pages/detail?url=' + that.data.linkurl,
+    }
+
+  },
   onLogoLoad: function(e) {
     const that = this ;
     console.log("lalallalalalal");
@@ -31,7 +48,15 @@ Page({
       logoloadfin:'true',
     });
   },
-  onLoad: function () {
+  onLoad: function (options) {
+    if( options.url ){
+      wx.navigateTo({
+        url: '../detail/detail?url=' + options.url,
+      });
+      console.log(options.url);
+     // return;
+    }
+
 
     // 默认值
     let rssUrl = 'https://www.cnbeta.com/backend.php';
