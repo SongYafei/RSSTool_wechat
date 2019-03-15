@@ -106,7 +106,7 @@ Page({
     const favicon = event.currentTarget.dataset.rssItemFavicon;
     console.log(event);
     wx.navigateTo({
-      url: `../detail/detail?id=${rssItemData}`,
+      url: `../detail/detail?id=${rssItemData}&url=`,
     });
   },
   getUserInfo: function(e) {

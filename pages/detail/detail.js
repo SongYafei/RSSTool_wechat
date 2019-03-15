@@ -8,12 +8,36 @@ Page({
    * 页面的初始数据
    */
   data: {
+    linkurl:'',
     title:'',
     author:'',
     pubTime:'',
     summary:'',
     article:'',
   },
+  /*
+  页面转发
+  */
+  onShareAppMessage: function (res) {
+
+      console.log("onShareAppMessage")
+      return {
+        title: title,
+        path: '/pages/detail?url=' + linkurl,
+        success: function (res) {
+          // 转发成功
+          wx.showToast({
+            title: '分享成功',
+            icon: 'none'
+          })
+        },
+        fail: function (res) {
+          // 转发失败
+        }
+      }
+    
+  }
+  ,
 
   /**
    * 生命周期函数--监听页面加载
@@ -21,20 +45,32 @@ Page({
   onLoad: function (options) {
     var that = this;
 
-    const rssData = wx.getStorageSync('rssData') || {};
-    const author = rssData.title || '';
+    console.log(options) ;
 
-    const rssDataItem = rssData.item[options.id];
-    const { title, link, pubDate } = rssDataItem;
+    var linkurl = "";
+    if ( options.url.length == 0 ){
+      const rssData = wx.getStorageSync('rssData') || {};
+      const author = rssData.title || '';
 
-    console.log(link.text)
+      const rssDataItem = rssData.item[options.id];
+      const { title, link, pubDate } = rssDataItem;
 
-    var linkurl = link.text.substring(link.text.lastIndexOf('/'), link.text.length);
-    linkurl = 'https://m.cnbeta.com/view' + linkurl ;
+      console.log(link.text)
+
+      linkurl = link.text.substring(link.text.lastIndexOf('/'), link.text.length);
+      linkurl = 'https://m.cnbeta.com/view' + linkurl;
+
+    }else{
+      linkurl = options.url ;
+    }
+   
 
     wx.setStorageSync('linkurl', linkurl) ;
 
     console.log(linkurl) ;
+    that.setData({
+      linkurl:linkurl ,
+    })
 
     this.getArticle(linkurl) ;
     
@@ -112,8 +148,11 @@ Page({
           var regImgurl = new RegExp('https://static.cnbetacdn.com', "g");
           article = article.replace(regImgurl, "https://images.weserv.nl/?url=https://static.cnbetacdn.com")
 
-          var regPstyle = new RegExp('<p', "g");
-          article = article.replace(regPstyle, '<p style="margin-top:24px;"');
+          var regPstyle = new RegExp('<p style="', "g");
+          article = article.replace(regPstyle, '<p class="textattr" style="margin-top:24px;');
+
+          var regPstyle2 = new RegExp('<p>', "g");
+          article = article.replace(regPstyle2, '<p class="textattr" style="margin-top:24px;">');
 
           that.setData({
             article: article,

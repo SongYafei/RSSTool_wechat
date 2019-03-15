@@ -46,3 +46,7 @@
   text-indent: 40rpx;
   margin-bottom: 150rpx;
 }
+
+.textattr {
+  user-select: true ;
+}
