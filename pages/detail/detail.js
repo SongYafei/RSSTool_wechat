@@ -204,9 +204,11 @@ Page({
       // 来自页面内转发按钮
       console.log(res.target);
     }
+
+    const rssUrl = wx.getStorageSync('curRssUrl');
     return {
       title: 'cnBeta最新资讯',
-      path: '/pages/index/index?url='+that.data.linkurl,
+      path: '/pages/index/index?url='+that.data.linkurl + '&rssUrl='+rssUrl,
     }
 
   }

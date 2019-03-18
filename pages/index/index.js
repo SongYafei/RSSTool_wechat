@@ -67,6 +67,8 @@ Page({
   getRss: function (rssUrl) {
     const that = this;
 
+    wx.setStorageSync('curRssUrl', rssUrl);
+
     wx.showLoading({
       title: '加载中...',
     });
