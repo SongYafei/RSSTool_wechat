@@ -1,8 +1,10 @@
 {
   "pages": [
+    "pages/rsslist/rsslist",
     "pages/index/index",
     "pages/logs/logs",
-    "pages/detail/detail"
+    "pages/detail/detail",
+    "pages/rsscenter/rsscenter"
   ],
   "window": {
     "backgroundTextStyle": "light",
