@@ -7,15 +7,10 @@ Page({
   data: {
     rssedData: [
       {
-        title: '知乎每日精选',
-        favicon: 'https://www.zhihu.com/favicon.ico',
-        rssUrl: 'https://www.zhihu.com/rss',
-      },
-      {
-        title: 'the weak',
-        favicon: 'https://theweek.com/favicon.ico',
-        rssUrl: 'https://theweek.com/rss.xml',
-      },
+        title: 'cnBeta业界资讯',
+        favicon: 'https://www.cnbeta.com/favicon.ico',
+        rssUrl: 'https://www.cnbeta.com/backend.php',
+      }
     ],
     curSelectId: '', // 当前选中的源id
 
@@ -24,11 +19,14 @@ Page({
    * 从缓存读取数据，初始化数据
    */
   initList: function () {
-    const rssedData = wx.getStorageSync('rssedData') || [];
 
-    this.setData({
-      rssedData,
-    });
+    const rssedData = wx.getStorageSync('rssedData') || null;
+    if( rssedData != null){
+
+      this.setData({
+        rssedData,
+      });
+    }
   },
 
   /**

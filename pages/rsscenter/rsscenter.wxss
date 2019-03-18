@@ -3,32 +3,7 @@
   padding: 24rpx;
 }
 
-.zan-col {
-  background-color: #39a9ed;
-  height: 25vw;
-  /* line-height: 25vw; */
-  text-align: center;
-  padding-top: 60rpx;
-  color: #fff;
-  position: relative;
-}
 
-.zan-col:nth-child(odd) {
-  background-color: #66c6f2;
-}
-
-.avatar {
-  width: 48rpx;
-  height: 48rpx;
-}
-
-.rss-author {
-  font-size: 24rpx;
-}
-
-.rss-add {
-  font-size: 48rpx;
-}
 
 .rss-item-popup__container {
   padding:12px 24px;

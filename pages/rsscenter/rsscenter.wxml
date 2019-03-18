@@ -1,9 +1,9 @@
 <!--pages/rsscenter/rsscenter.wxml-->
-<view class='category'>拓宽知识</view>
-
+<view class='category'>RSS订阅中心</view>
+<view class='spliter-line'></view>
 <view class="zan-row">
   <block wx:for="{{rssDataComputed}}" wx:key="{{index}}">
-    <view class="zan-col zan-col-6" bindtap='handleRssItemTap' data-rss-item-data='{{item}}'>
+    <view class="zan-col zan-col-8" bindtap='handleRssItemTap' data-rss-item-data='{{item}}'>
       <view class='rssed' wx:if='{{item.rssed}}'>
         <icon class='rssed-icon' type="success" size="20" />
       </view>
@@ -13,7 +13,7 @@
   </block>
 </view>
 
-<view class='spliter-line'></view>
+<!-- <view class='spliter-line'></view> -->
 
 <!--简介弹框 start  -->
 <view class="zan-popup {{ showPopup ? 'zan-popup--show' : ''}}">

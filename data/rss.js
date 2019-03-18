@@ -2,6 +2,15 @@
 const rssData = [
   // 优质社区
   {
+    title: 'cnBeta业界资讯',
+    link: 'https://www.cnbeta.com',
+    description: 'cnBeta业界新闻资讯',
+    favicon: 'https://www.cnbeta.com/favicon.ico',
+    rssUrl: 'https://www.cnbeta.com/backend.php',
+    remark: '',
+    distype:'richtext',
+  },
+  {
     title: '知乎每日精选',
     link: 'https://www.zhihu.com',
     description: '中文互联网最大的知识平台，帮助人们便捷地分享彼此的知识、经验和见解。',
@@ -24,7 +33,7 @@ const rssData = [
     remark: '',
   },
   {
-    title: '网易新闻·有态度专栏',
+    title: '网易新闻',
     link: 'http://news.163.com',
     description: '汇集互联网热门、有趣内容的图片社区',
     favicon: 'https://163.com/favicon.ico',
@@ -39,7 +48,7 @@ const rssData = [
     remark: '无https',
   },
   {
-    title: '开源中国社区最新新闻',
+    title: '开源中国社区',
     link: 'https://www.oschina.net',
     description: '开源中国社区——找到您想要的开源软件，分享和交流',
     favicon: 'https://www.oschina.net/favicon.ico',
@@ -75,7 +84,7 @@ const rssData = [
 
   // 新闻资讯
   {
-    title: '精彩资讯-Mtime时光网',
+    title: 'Mtime时光网',
     link: 'http://mtime.com',
     description: '时光网（Mtime.com）精彩资讯',
     favicon: 'http://mtime.com/favicon.ico',

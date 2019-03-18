@@ -59,7 +59,7 @@ Page({
 
 
     // 默认值
-    let rssUrl = 'https://www.cnbeta.com/backend.php';
+    let rssUrl = options.rssUrl;
 
     this.getRss(rssUrl);
   },

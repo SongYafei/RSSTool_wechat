@@ -10,10 +10,10 @@
 } 
 
 .spliter-line {
-  height: 1px;
+  height: 1rpx;
   width: 100%;
-  background-color: #ececec;
-  margin: 24rpx 0;
+  background-color: #F3F3F3;
+  margin: 0rpx 0;
 }
 
 .min-vh {
@@ -24,17 +24,47 @@
 .right-arrow {
   content: " ";
   display: inline-block;
-  height: 6px;
-  width: 6px;
-  border-width: 2px 2px 0 0;
+  height: 6rpx;
+  width: 6rpx;
+  border-width: 2rpx 2rpx 0 0;
   border-color: #C8C8CD;
   border-style: solid;
   -webkit-transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
   transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
   position: absolute;
   top: 50%;
-  margin-top: -4px;
+  margin-top: -4rpx;
   right: 14rpx;
+}
+
+.zan-col {
+  background-color: #fff;
+  height: 33vw;
+  line-height: 15vw; 
+  text-align: center;
+  padding-top: 60rpx;
+  color: #666;
+  position: relative;
+  border-bottom: 1rpx solid #F3F3F3;
+  border-right: 1rpx solid #F3F3F3;
+}
+
+.zan-col:nth-child(odd) {
+  background-color: #fff;
+}
+
+.avatar {
+  width: 68rpx;
+  height: 68rpx;
+}
+
+.rss-author {
+  font-size: 24rpx;
+  margin-top: -60rpx;
+}
+
+.rss-add {
+  font-size: 48rpx;
 }
 
 /*layout*/

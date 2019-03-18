@@ -123,7 +123,7 @@ Page({
       // console.log('navagate to rssed page');
 
       wx.reLaunch({
-        url: `../rssed/rssed`,
+        url: `../rsslist/rsslist`,
       });
     }
   },

@@ -1,21 +1,5 @@
 /* pages/rsslist.wxss */
 
-.zan-col {
-  background-color: #fff;
-  height: 33vw;
-  line-height: 15vw;
-  text-align: center;
-  padding-top: 80rpx;
-  color: #333;
-  position: relative;
-  border-bottom: 1rpx solid #F3F3F3;
-  border-left: 1rpx solid #F3F3F3;
-}
-
-.zan-col:nth-child(odd) {
-  background-color: #fff;
-}
-
 .delete-box {
   position: absolute;
   width: 100%;
@@ -43,20 +27,6 @@
   background-color: red;
   top: 0;
   right: 0;
-}
-
-.avatar {
-  width: 48rpx;
-  height: 48rpx;
-}
-
-.rss-author {
-  font-size: 24rpx;
-}
-
-.rss-add {
-  font-size: 48rpx;
-  padding-top: 60rpx;
 }
 
 .rss-more {
