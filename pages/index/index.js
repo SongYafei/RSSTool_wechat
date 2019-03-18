@@ -112,7 +112,7 @@ Page({
     let that = this;
     that.setData({
       author: '',     // 源名称
-      favicon: '',    // 源logo
+      favicon: 'cnbetalogo.png',    // 源logo
       copyright: '',  // 源版权
       pubDate: '',    // 源更新时间
       rssData: {},    // 源数据
