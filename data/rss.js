@@ -26,15 +26,15 @@ const rssData = [
   //   rssUrl: 'https://service-ox5moi4m-1258237701.gz.apigw.tencentcs.com/release/zhihudaily',
   //   detail: 'description',
   // },
-  {
-    title: '好奇心日报',
-    link: 'https://www.qdaily.com',
-    description: '这是一个帮助你发现生活何以美好的商业新闻媒体。所有内容均原创或者邀请专业作者撰写。报道涉及智能、设计、城市、时尚和娱乐等领域。全部都建立在商业视角之上。',
-    favicon: 'https://www.qdaily.com/favicon.ico',
-    rssUrl: 'https://service-ox5moi4m-1258237701.gz.apigw.tencentcs.com/release/qdaily',
-    remark: '',
-    detail: 'description',
-  },
+  // {
+  //   title: '好奇心日报',
+  //   link: 'https://www.qdaily.com',
+  //   description: '这是一个帮助你发现生活何以美好的商业新闻媒体。所有内容均原创或者邀请专业作者撰写。报道涉及智能、设计、城市、时尚和娱乐等领域。全部都建立在商业视角之上。',
+  //   favicon: 'https://www.qdaily.com/favicon.ico',
+  //   rssUrl: 'https://service-ox5moi4m-1258237701.gz.apigw.tencentcs.com/release/qdaily',
+  //   remark: '',
+  //   detail: 'description',
+  // },
   // {
   //   title: '网易新闻',
   //   link: 'http://news.163.com',
@@ -146,24 +146,24 @@ const rssData = [
   // },
 
   // 设计
-  {
-    title: '优设-UISDC',
-    link: 'https://www.uisdc.com',
-    description: '优秀设计联盟-SDC-优设网-设计师交流学习平台-听讲座，聊设计，找素材，尽在优设网',
-    favicon: 'https://www.uisdc.com/favicon.ico',
-    rssUrl: 'https://service-ox5moi4m-1258237701.gz.apigw.tencentcs.com/release/uisdc',
-    remark: '',
-    detail: 'content:encoded',
-  },
-  {
-    title: '腾讯CDC',
-    link: 'http://cdc.tencent.com',
-    description: '腾讯CDC',
-    favicon: 'http://cdc.tencent.com/favicon.ico',
-    rssUrl: 'https://service-ox5moi4m-1258237701.gz.apigw.tencentcs.com/release/tencentcdc',
-    remark: '',
-    detail: 'content:encoded',
-  },
+  // {
+  //   title: '优设-UISDC',
+  //   link: 'https://www.uisdc.com',
+  //   description: '优秀设计联盟-SDC-优设网-设计师交流学习平台-听讲座，聊设计，找素材，尽在优设网',
+  //   favicon: 'https://www.uisdc.com/favicon.ico',
+  //   rssUrl: 'https://service-ox5moi4m-1258237701.gz.apigw.tencentcs.com/release/uisdc',
+  //   remark: '',
+  //   detail: 'content:encoded',
+  // },
+  // {
+  //   title: '腾讯CDC',
+  //   link: 'http://cdc.tencent.com',
+  //   description: '腾讯CDC',
+  //   favicon: 'http://cdc.tencent.com/favicon.ico',
+  //   rssUrl: 'https://service-ox5moi4m-1258237701.gz.apigw.tencentcs.com/release/tencentcdc',
+  //   remark: '',
+  //   detail: 'content:encoded',
+  // },
 
   // 英语
   
@@ -205,7 +205,7 @@ const rssData = [
   //   detail: 'description',
   // },
   {
-    title: '豆瓣最受欢迎的书评',
+    title: '豆瓣书评',
     link: 'https://www.douban.com',
     description: '豆瓣成员投票选出的最佳书评',
     favicon: 'https://www.douban.com/favicon.ico',

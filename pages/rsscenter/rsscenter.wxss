@@ -48,13 +48,11 @@
 
 .rssed {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: -5rpx;
+  right: 10rpx;
   border-radius:50%;
-  width: 20px;
-  height: 20px;
-  text-align: center;
-  background-color: #09BB07;
+  width: 22;
+  height: 22;
   overflow: hidden;
 }
 

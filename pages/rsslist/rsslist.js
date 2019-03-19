@@ -25,6 +25,7 @@ Page({
   initList: function () {
 
     const rssedData = wx.getStorageSync('rssedData') || null;
+    console.log(rssedData);
     if( rssedData != null){
 
       this.setData({
@@ -32,9 +33,7 @@ Page({
       });
     }
     else{
-      var rssedData2 = [] ;
-      rssedData2.push(this.data.rssedData);
-      wx.setStorageSync('rssedData', rssedData2);
+      wx.setStorageSync('rssedData', this.data.rssedData);
     }
   },
 
