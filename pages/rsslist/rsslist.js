@@ -8,8 +8,12 @@ Page({
     rssedData: [
       {
         title: 'cnBeta业界资讯',
+        link: 'https://www.cnbeta.com',
+        description: 'cnBeta业界新闻资讯',
         favicon: 'https://www.cnbeta.com/favicon.ico',
         rssUrl: 'https://www.cnbeta.com/backend.php',
+        remark: '',
+        detail: 'crawl',
       }
     ],
     curSelectId: '', // 当前选中的源id
@@ -26,6 +30,11 @@ Page({
       this.setData({
         rssedData,
       });
+    }
+    else{
+      var rssedData2 = [] ;
+      rssedData2.push(this.data.rssedData);
+      wx.setStorageSync('rssedData', rssedData2);
     }
   },
 
@@ -89,13 +98,14 @@ Page({
    */
   handleRssItemTap: function (event) {
     const rssItemData = event.currentTarget.dataset.rssItemData;
-    const { title, favicon, rssUrl } = rssItemData;
+    const { title, favicon, rssUrl, detail } = rssItemData;
+    console.log(rssItemData);
 
     // 关闭取消关注-删除模式
     this.handleRssItemHideDelete();
 
     wx.navigateTo({
-      url: `../index/index?rssUrl=${rssUrl}&favicon=${favicon}`,
+      url: `../index/index?rssUrl=${rssUrl}&favicon=${favicon}&detailType=${detail}&title=${title}`,
     });
   },
 

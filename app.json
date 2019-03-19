@@ -9,7 +9,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#0061b2",
-    "navigationBarTitleText": "cnBeta News",
+    "navigationBarTitleText": "RSS Reader",
     "navigationBarTextStyle": "white"
   }
 }

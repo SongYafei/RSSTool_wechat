@@ -17,6 +17,8 @@ Page({
     pubDate: '',    // 源更新时间
     rssData: {},    // 源数据
     logoloadfin:'',
+    detailType: 'description', //文章正文获取方式 description：从描述中获取 content-encode：从content-encode获取 crawl：正则匹配抓取
+    title:'RSS Feed', // 新闻站名
   },
   //事件处理函数
   bindViewTap: function() {
@@ -43,15 +45,28 @@ Page({
   },
   onLogoLoad: function(e) {
     const that = this ;
-    console.log("lalallalalalal");
+    
     that.setData({
       logoloadfin:'true',
     });
   },
   onLoad: function (options) {
+
+    if( options.title ){
+      this.setData({
+        title:options.title,
+      });
+    }
+
+    wx.setNavigationBarTitle({
+      title: this.data.title,
+    });
+
+    wx.setStorageSync('navigationbartitle', this.data.title);
+
     if( options.url ){
       wx.navigateTo({
-        url: '../detail/detail?url=' + options.url,
+        url: `../detail/detail?url=${options.url}`,
       });
       console.log(options.url);
      // return;
@@ -60,6 +75,12 @@ Page({
 
     // 默认值
     let rssUrl = options.rssUrl;
+    this.setData({
+      favicon: `https://images.weserv.nl/?url=${options.favicon}`,
+      detailType: options.detailType,
+    });
+
+    wx.setStorageSync('curDetailType', this.data.detailType);
 
     this.getRss(rssUrl);
   },
@@ -80,17 +101,20 @@ Page({
         'content-type': 'application/xml' // 默认值
       },
       success: function (res) {
-
-        var rssData = xml2json(res.data).rss.channel;//.channel.item.slice(0, 50);
+        //console.log("srcdata", res.data);
+        var dataJson = xml2json(res.data) ;
+        console.log(dataJson) ;
+        var rssData = dataJson.rss.channel;//.channel.item.slice(0, 50);
         console.log('rssdata:', rssData);
 
         const {description, link, lastBuildDate = '', copyright = '', pubDate = '',image='' } = rssData;
+        var author = description.text || '' ;
 
         that.setData({
-          author: description.text.replace('cnBeta.COM -',''),     // 源名称
+          author: author.replace('cnBeta.COM -',''),     // 源名称
          // favicon: 'https://images.weserv.nl/?url='+image.url.text,    // 源logo
-          copyright: copyright.text,  // 源版权
-          pubDate: (lastBuildDate || pubDate) ? util.formatDate("yyyy-MM-dd HH:mm:ss", lastBuildDate || pubDate.text) : '',    // 源更新时间
+          copyright: copyright.text || '',  // 源版权
+          pubDate: (lastBuildDate || pubDate) ? util.formatDate("yyyy-MM-dd HH:mm:ss", lastBuildDate.text || pubDate.text) : '',    // 源更新时间
           rssData: rssData,    // 源数据
         });
 
@@ -131,7 +155,7 @@ Page({
   handleRssItemTap: (event) => {
     const rssItemData = event.currentTarget.dataset.rssItemData;
     const favicon = event.currentTarget.dataset.rssItemFavicon;
-    console.log(event);
+    console.log(rssItemData);
     wx.navigateTo({
       url: `../detail/detail?id=${rssItemData}&url=`,
     });

@@ -1,7 +1,20 @@
 var removetxt = function (inputtext){
-  var pos = inputtext.search("<strong>阅读全文</strong>");
-  var ret = inputtext.substring(0, pos) + "</a>" ;
-  //console.log(ret)
+
+  var ret = inputtext ;
+  var detailType = wx.getStorageSync('curDetailType');
+  console.log(detailType);
+
+  if( detailType=='crawl'){
+    var pos = ret.search("<strong>阅读全文</strong>");
+    if (pos < 0) {
+      return ret;
+    }
+    ret = ret.substring(0, pos) + "</a>";
+  }else{
+    ret = inputtext.substring(0, 200);
+    console.log(";;;;;;;;;;;;;;;;;;;;;;;;");
+  }
+
   return ret;
 }
 

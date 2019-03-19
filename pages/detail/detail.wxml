@@ -9,7 +9,7 @@
   </view>
   <!--wxparser rich-text="{{html}}" /-->
   <!-- <template is="wxParse" data="{{wxParseData:article.nodes}}"/> -->
-  <view class='summary'>
+  <view class='summary' wx:if='{{summary}}'>
     <rich-text nodes="{{summary}}" bindtap="tap"></rich-text>
   </view>
   <view class='article'>

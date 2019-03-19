@@ -20,40 +20,89 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.setNavigationBarTitle({
+      title: wx.getStorageSync('navigationbartitle'),
+    });
+
     var that = this;
 
     console.log(options) ;
 
-    var linkurl = "";
-    if ( options.url.length == 0 ){
-      const rssData = wx.getStorageSync('rssData') || {};
-      const author = rssData.title || '';
+    const rssData = wx.getStorageSync('rssData') || {};
+    const author = rssData.title || '';
+    const rssDataItem = rssData.item[options.id];
+    console.log(rssDataItem);
+    const detailType = wx.getStorageSync('curDetailType') ;
+    console.log(detailType) ;
 
-      const rssDataItem = rssData.item[options.id];
-      const { title, link, pubDate } = rssDataItem;
+    if (detailType == 'description' 
+    || detailType == 'content:encoded'){
 
-      console.log(link.text)
+      var article = "";
+      if (detailType == 'content:encoded'){
+        console.log(";;;;;;;;;;;;;;");
+        article = this.formatArticle(rssDataItem['content:encoded'].text);
+      }else{
+        article = this.formatArticle(rssDataItem.description.text);
+      }
 
-      linkurl = link.text.substring(link.text.lastIndexOf('/'), link.text.length);
-      linkurl = 'https://m.cnbeta.com/view' + linkurl;
+      
+      const author = rssDataItem['dc:creator'] || rssDataItem['category_title'] || rssDataItem['category'] || {} ;
 
+      this.setData({
+        article: article,
+        title:rssDataItem.title.text,
+        pubTime:rssDataItem.pubDate.text,
+        author: author.text,
+      })
+      
     }else{
-      linkurl = options.url ;
+      var linkurl = "";
+      if ( options.url.length == 0) {
+
+        const link = rssDataItem.link;
+        console.log(link);
+
+        console.log(link.text)
+
+        linkurl = link.text.substring(link.text.lastIndexOf('/'), link.text.length);
+        linkurl = 'https://m.cnbeta.com/view' + linkurl;
+
+      } else {
+        linkurl = options.url;
+      }
+
+
+      wx.setStorageSync('linkurl', linkurl);
+
+      console.log(linkurl);
+      that.setData({
+        linkurl: linkurl,
+      })
+
+      this.getArticle(linkurl);
     }
-   
-
-    wx.setStorageSync('linkurl', linkurl) ;
-
-    console.log(linkurl) ;
-    that.setData({
-      linkurl:linkurl ,
-    })
-
-    this.getArticle(linkurl) ;
-    
 
   },
+  /**
+   * 格式化正文的展示
+   */
+  formatArticle:function(content){
 
+    var regImgstyle = new RegExp('<img', "g");
+    var article = content.replace(regImgstyle, '<img style="max-width:100%;height:auto;margin-left:-24px;" '); //防止图片过大 ;
+
+    var regImgurl = new RegExp('https://static.cnbetacdn.com', "g");
+    article = article.replace(regImgurl, "https://images.weserv.nl/?url=static.cnbetacdn.com")
+
+    var regPstyle = new RegExp('<p style="', "g");
+    article = article.replace(regPstyle, '<p class="textattr" style="margin-top:24px;');
+
+    var regPstyle2 = new RegExp('<p>', "g");
+    article = article.replace(regPstyle2, '<p class="textattr" style="margin-top:24px;">');
+
+    return article ;
+  },
   getArticle:function(url) {
     wx.showLoading({
       title: '加载中...',
@@ -118,17 +167,7 @@ Page({
         if (content != null) {
           console.log(content[1]);
 
-          var regImgstyle = new RegExp('<img', "g");
-          var article = content[1].replace(regImgstyle, '<img style="max-width:100%;height:auto;margin-left:-24px;" '); //防止图片过大 ;
-
-          var regImgurl = new RegExp('https://static.cnbetacdn.com', "g");
-          article = article.replace(regImgurl, "https://images.weserv.nl/?url=static.cnbetacdn.com")
-
-          var regPstyle = new RegExp('<p style="', "g");
-          article = article.replace(regPstyle, '<p class="textattr" style="margin-top:24px;');
-
-          var regPstyle2 = new RegExp('<p>', "g");
-          article = article.replace(regPstyle2, '<p class="textattr" style="margin-top:24px;">');
+          const article = that.formatArticle(content[1]) ;
 
           that.setData({
             article: article,
