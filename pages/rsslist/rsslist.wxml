@@ -1,6 +1,8 @@
 <!--pages/rsslist.wxml-->
+
+<image class='guidpic' mode='widthFix' src='/res/guid.png'></image>
 <view class='spliter-line'></view>
-<view class="zan-row min-vh" catchtap='handleRssItemHideDelete'>
+<view class="zan-row" catchtap='handleRssItemHideDelete'>
   <block wx:for="{{rssedData}}" wx:key="{{index}}">
     <view class="zan-col zan-col-8" bindtap='handleRssItemTap' bindlongpress='handleRssItemShowDelete' data-rss-id='{{index}}' data-rss-item-data='{{item}}'>
       <!--logo start -->

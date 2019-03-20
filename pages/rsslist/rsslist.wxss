@@ -30,6 +30,11 @@
 }
 
 .rss-more {
-  font-size: 48rpx;
+  font-size: 60rpx;
   padding-top: 48rpx;
+  color: #3064A3;
+}
+
+.guidpic{
+  width: 100%;
 }

@@ -1,3 +1,6 @@
+// 导入rss源数据
+const rss = require('../../data/rss.js');
+
 // pages/rsslist.js
 Page({
 
@@ -41,6 +44,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
+    console.log(options) ;
+
+    var launchPage = wx.getStorageSync("launchpage") 
+    if( launchPage != 0){
+       var launchPageInfo = rss.rssData[launchPage-1]
+
+      wx.navigateTo({
+        url: `../index/index?rssUrl=${launchPageInfo.rssUrl}&favicon=${launchPageInfo.favicon}&detailType=${launchPageInfo.detail}&title=${launchPageInfo.title}`,
+      });
+    }
+
     this.initList();
   },
 
@@ -90,7 +105,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: "RSS Reader",
+     // path: '/pages/index/index?url=' + that.data.linkurl + '&rssUrl=' + rssUrl,
+    }
   },
   /**
    * 点击源，跳转至源内容列表页
@@ -104,7 +122,7 @@ Page({
     this.handleRssItemHideDelete();
 
     wx.navigateTo({
-      url: `../index/index?rssUrl=${rssUrl}&favicon=${favicon}&detailType=${detail}&title=${title}`,
+      url: `../index/index?rssUrl=${rssUrl}`,
     });
   },
 
@@ -169,7 +187,7 @@ Page({
    */
   handleMore: function () {
     wx.navigateTo({
-      url: '../more/more',
+      url: '../setting/more',
     })
   },
 })

@@ -68,7 +68,11 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: "RSS Reader",
+      path: '/pages/rsslist/rsslit',
+     // imageUrl:'/res/guid.png',
+    }
   },
 
   // 简介弹框显隐开关
@@ -84,7 +88,7 @@ Page({
     const rssedData = wx.getStorageSync('rssedData') || [];
     const rssedTitleArr = rssedData.map((item) => item.title);
     const rssDataComputed = rssData.map((item) => {
-      if (rssedTitleArr.indexOf(item.title) > -1 ) {
+      if (rssedTitleArr.indexOf(item.title) > -1) {
         return {
           ...item,
           rssed: true,
@@ -95,7 +99,7 @@ Page({
 
     // console.log(rssDataComputed)
     this.setData({
-        rssDataComputed,
+      rssDataComputed,
     });
   },
 

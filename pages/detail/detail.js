@@ -14,17 +14,22 @@ Page({
     pubTime:'',
     summary:'',
     article:'',
+    sitetitle:'',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var sitetitle = wx.getStorageSync('navigationbartitle')
     wx.setNavigationBarTitle({
-      title: wx.getStorageSync('navigationbartitle'),
+      title: sitetitle,
     });
 
     var that = this;
+    that.setData({
+      sitetitle: sitetitle,
+    })
 
     console.log(options) ;
 
@@ -38,23 +43,36 @@ Page({
     if (detailType == 'description' 
     || detailType == 'content:encoded'){
 
-      var article = "";
-      if (detailType == 'content:encoded'){
-        console.log(";;;;;;;;;;;;;;");
-        article = this.formatArticle(rssDataItem['content:encoded'].text);
-      }else{
-        article = this.formatArticle(rssDataItem.description.text);
+      if( options.article ){
+
+        this.setData({
+          article: options.article,
+          title: options.title,
+          pubTime: options.pubtime,
+          author: options.author,
+        })
+      }
+      else{
+        var article = "";
+        if (detailType == 'content:encoded') {
+
+          article = this.formatArticle(rssDataItem['content:encoded'].text);
+        } else {
+          article = this.formatArticle(rssDataItem.description.text);
+        }
+
+
+        const author = rssDataItem['dc:creator'] || rssDataItem['category_title'] || rssDataItem['category'] || {};
+
+        this.setData({
+          article: article,
+          title: rssDataItem.title.text,
+          pubTime: rssDataItem.pubDate.text,
+          author: author.text,
+        })
       }
 
       
-      const author = rssDataItem['dc:creator'] || rssDataItem['category_title'] || rssDataItem['category'] || {} ;
-
-      this.setData({
-        article: article,
-        title:rssDataItem.title.text,
-        pubTime:rssDataItem.pubDate.text,
-        author: author.text,
-      })
       
     }else{
       var linkurl = "";
@@ -245,9 +263,20 @@ Page({
     }
 
     const rssUrl = wx.getStorageSync('curRssUrl');
+    const detailType = wx.getStorageSync('curDetailType');
+    var dstPath = `/pages/index/index?url=${that.data.linkurl}&rssUrl=${rssUrl}`;
+    if (detailType == 'description'
+      || detailType == 'content:encoded') {
+      
+    //  dstPath = `/pages/index/index?rssUrl=${rssUrl}&author=${that.data.author}&pubtime=${that.data.pubTime}&detailtitle=${that.data.title}&article='${that.data.article}'`;
+      dstPath='';
+    }
+
+    console.log('titile', that.data.sitetitle);
+    
     return {
-      title: 'cnBeta最新资讯',
-      path: '/pages/index/index?url='+that.data.linkurl + '&rssUrl='+rssUrl,
+      title: that.data.sitetitle,
+      path: dstPath,
     }
 
   }

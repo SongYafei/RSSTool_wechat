@@ -4,7 +4,8 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/detail/detail",
-    "pages/rsscenter/rsscenter"
+    "pages/rsscenter/rsscenter",
+    "pages/setting/more"
   ],
   "window": {
     "backgroundTextStyle": "light",

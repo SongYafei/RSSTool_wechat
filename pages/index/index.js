@@ -4,6 +4,8 @@
 const util = require('../../utils/util.js');
 const xml2json = require('../../xmllib/xml2json.js')
 const app = getApp()
+// 导入rss源数据
+const rsscenter = require('../../data/rss.js')
 
 
 Page({
@@ -12,7 +14,7 @@ Page({
    */
   data: {
     author: '',     // 源名称
-    favicon: 'cnbetalogo.png',    // 源logo
+    favicon: '/res/cnbetalogo.png',    // 源logo
     copyright: '',  // 源版权
     pubDate: '',    // 源更新时间
     rssData: {},    // 源数据
@@ -38,7 +40,7 @@ Page({
       console.log(res.target);
     }
     return {
-      title: 'cnBeta最新资讯',
+      title: 'RSS Reader-' + that.data.title,
       //path: '/pages/detail?url=' + that.data.linkurl,
     }
 
@@ -52,11 +54,22 @@ Page({
   },
   onLoad: function (options) {
 
-    if( options.title ){
-      this.setData({
-        title:options.title,
-      });
-    }
+    var rssDataFind = [];
+    rsscenter.rssData.forEach( function(item) {
+      if (options.rssUrl == item.rssUrl) {
+        rssDataFind = item;
+      }
+    });
+    
+    console.log('rssdatafind',rssDataFind);
+
+    // 默认值
+    let rssUrl = options.rssUrl;
+    this.setData({
+      favicon: rssDataFind.favicon,
+      detailType: rssDataFind.detail,
+      title: rssDataFind.title,
+    });
 
     wx.setNavigationBarTitle({
       title: this.data.title,
@@ -70,16 +83,14 @@ Page({
       });
       console.log(options.url);
      // return;
+    } else if (options.article ){
+      wx.navigateTo({
+        url: `../detail/detail?author=${options.author}&pubtime=${options.pubTime}&title=${options.title}&article=${options.article}`,
+      });
     }
 
 
-    // 默认值
-    let rssUrl = options.rssUrl;
-    this.setData({
-      favicon: `https://images.weserv.nl/?url=${options.favicon}`,
-      detailType: options.detailType,
-    });
-
+   
     wx.setStorageSync('curDetailType', this.data.detailType);
 
     this.getRss(rssUrl);

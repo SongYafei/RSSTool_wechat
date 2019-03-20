@@ -1,0 +1,59 @@
+/* pages/setting/more.wxss */
+
+.title {
+  font-size: 32rpx;
+  color:#667F9E;
+  font-weight: bold;
+  margin-top: 50rpx;
+  margin-left: 12rpx;
+  text-align: center;
+}
+
+.picker {
+  background-color: white;
+  height: 200px;
+  margin-top: 10px;
+}
+
+.indicator {
+  height: 100rpx;
+ 
+}
+
+.column {
+  font-size: 24rpx;
+  color: rgb(18, 57, 105);
+  text-align: center;
+  line-height: 100rpx;
+}
+
+.result {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.container {
+  font-size: 26rpx;
+  color: #666;
+  padding: 12rpx 24rpx;
+  display: block;
+  line-height: 1.5;
+  margin-top: 200rpx;
+}
+
+.info {
+  font-size: 30rpx;
+  color: #333;
+  margin: 30rpx 0 10rpx;
+}
+
+.button{
+  margin-top: 10px;
+  width: 80%;
+  margin-left: 10%;
+}
+
+/** 添加自定义button点击态样式类**/
+.other-button-hover {
+  background-color: #667F9E;
+}
