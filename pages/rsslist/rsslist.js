@@ -13,7 +13,7 @@ Page({
         title: 'cnBeta业界资讯',
         link: 'https://www.cnbeta.com',
         description: 'cnBeta业界新闻资讯',
-        favicon: 'https://www.cnbeta.com/favicon.ico',
+        favicon: '/res/cnbetalogo.png',
         rssUrl: 'https://www.cnbeta.com/backend.php',
         remark: '',
         detail: 'crawl',
@@ -48,11 +48,11 @@ Page({
     console.log(options) ;
 
     var launchPage = wx.getStorageSync("launchpage") 
-    if( launchPage != 0){
+    if( launchPage != 0 && !options.from ){
        var launchPageInfo = rss.rssData[launchPage-1]
 
       wx.navigateTo({
-        url: `../index/index?rssUrl=${launchPageInfo.rssUrl}&favicon=${launchPageInfo.favicon}&detailType=${launchPageInfo.detail}&title=${launchPageInfo.title}`,
+        url: `../index/index?rssUrl=${launchPageInfo.rssUrl}`,
       });
     }
 

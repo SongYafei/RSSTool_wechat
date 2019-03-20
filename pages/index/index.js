@@ -21,6 +21,7 @@ Page({
     logoloadfin:'',
     detailType: 'description', //文章正文获取方式 description：从描述中获取 content-encode：从content-encode获取 crawl：正则匹配抓取
     title:'RSS Feed', // 新闻站名
+    rssUrl:'',
   },
   //事件处理函数
   bindViewTap: function() {
@@ -64,11 +65,11 @@ Page({
     console.log('rssdatafind',rssDataFind);
 
     // 默认值
-    let rssUrl = options.rssUrl;
     this.setData({
       favicon: rssDataFind.favicon,
       detailType: rssDataFind.detail,
       title: rssDataFind.title,
+      rssUrl: options.rssUrl,
     });
 
     wx.setNavigationBarTitle({
@@ -93,7 +94,7 @@ Page({
    
     wx.setStorageSync('curDetailType', this.data.detailType);
 
-    this.getRss(rssUrl);
+    this.getRss(this.data.rssUrl);
   },
 
   getRss: function (rssUrl) {
@@ -149,15 +150,14 @@ Page({
     let that = this;
     that.setData({
       author: '',     // 源名称
-      favicon: 'cnbetalogo.png',    // 源logo
+     // favicon: '',    // 源logo
       copyright: '',  // 源版权
       pubDate: '',    // 源更新时间
       rssData: {},    // 源数据
       logoloadfin:'',
     });
-    
-    let rssUrl = 'https://www.cnbeta.com/backend.php';
-    that.getRss(rssUrl);
+
+    that.getRss(this.data.rssUrl);
   },
   getUrl: function (index) {
     return this.data.rssData.item[index].link.text;

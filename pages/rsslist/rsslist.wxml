@@ -8,9 +8,9 @@
       <!--logo start -->
       <image class='avatar' mode='aspectFit' src='{{item.favicon}}'></image>
       <!--logo end  -->
-      
+
       <view class='rss-author'>{{item.title}}</view>
-      
+
       <view class='delete-box' wx:if='{{curSelectId === index}}' catchtap='handleRssItemHideDelete'>
         <view class='delete-bar' catchtap='handleRssItemDelete' data-rss-id='{{index}}'>
           <view class='delete'>-</view>

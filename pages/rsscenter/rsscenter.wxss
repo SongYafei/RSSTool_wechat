@@ -35,10 +35,10 @@
 .sub {
   font-size: 30rpx;
   color: #fff;
-  background-color: #39a9ed;
+  background-color: #667F9E;
   text-align: center;
   padding: 10rpx 18rpx;
-  border-radius: 12rpx;
+  border-radius: 8rpx;
   float: right;
 }
 

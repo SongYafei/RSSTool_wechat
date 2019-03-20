@@ -86,9 +86,9 @@ Page({
   handleRssedData: function (data) {
     const rssData = data || this.data.rssData;
     const rssedData = wx.getStorageSync('rssedData') || [];
-    const rssedTitleArr = rssedData.map((item) => item.title);
+    const rssedUrlArr = rssedData.map((item) => item.rssUrl);
     const rssDataComputed = rssData.map((item) => {
-      if (rssedTitleArr.indexOf(item.title) > -1) {
+      if (rssedUrlArr.indexOf(item.rssUrl) > -1) {
         return {
           ...item,
           rssed: true,
@@ -127,7 +127,7 @@ Page({
       // console.log('navagate to rssed page');
 
       wx.reLaunch({
-        url: `../rsslist/rsslist`,
+        url: `../rsslist/rsslist?from=1`,
       });
     }
   },

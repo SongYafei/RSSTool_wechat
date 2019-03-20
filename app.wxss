@@ -13,6 +13,7 @@
   height: 1rpx;
   width: 100%;
   background-color: #F3F3F3;
+  margin-top: -8rpx;
 }
 
 .min-vh {

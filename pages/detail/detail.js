@@ -192,7 +192,7 @@ Page({
           });
         }
 
-        wx.stopPullDownRefresh();
+        //wx.stopPullDownRefresh();
         wx.hideLoading();
       }
     });
