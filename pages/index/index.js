@@ -22,6 +22,7 @@ Page({
     detailType: 'description', //文章正文获取方式 description：从描述中获取 content-encode：从content-encode获取 crawl：正则匹配抓取
     title:'RSS Feed', // 新闻站名
     rssUrl:'',
+    fromsharedetailurl:'',  //从分享页过来的正文url
   },
   //事件处理函数
   bindViewTap: function() {
@@ -42,7 +43,7 @@ Page({
     }
     return {
       title: 'RSS Reader-' + that.data.title,
-      //path: '/pages/detail?url=' + that.data.linkurl,
+      path: `/pages/index/index?rssUrl=${encodeURIComponent(that.data.rssUrl)}`,
     }
 
   },
@@ -55,9 +56,12 @@ Page({
   },
   onLoad: function (options) {
 
+    console.log("options.rssurl", options)
+    var rssUrl = decodeURIComponent(options.rssUrl)
+    console.log(rssUrl)
     var rssDataFind = [];
     rsscenter.rssData.forEach( function(item) {
-      if (options.rssUrl == item.rssUrl) {
+      if (rssUrl == item.rssUrl) {
         rssDataFind = item;
       }
     });
@@ -69,7 +73,7 @@ Page({
       favicon: rssDataFind.favicon,
       detailType: rssDataFind.detail,
       title: rssDataFind.title,
-      rssUrl: options.rssUrl,
+      rssUrl: rssUrl,
     });
 
     wx.setNavigationBarTitle({
@@ -79,19 +83,28 @@ Page({
     wx.setStorageSync('navigationbartitle', this.data.title);
 
     if( options.url ){
+
+      var detailurl = decodeURIComponent(options.url) ;
+      // if (detailType == 'description'
+      // || detailType == 'content:encoded') {
+      //   this.setData({
+      //     fromsharedetailurl: detailurl,
+      //   })
+      // }else {
+        wx.navigateTo({
+          url: `../detail/detail?url=${detailurl}`,
+        });
+        console.log(detailurl);
+     // }
+
+     
+    } 
+    else if (options.article) {
       wx.navigateTo({
-        url: `../detail/detail?url=${options.url}`,
-      });
-      console.log(options.url);
-     // return;
-    } else if (options.article ){
-      wx.navigateTo({
-        url: `../detail/detail?author=${options.author}&pubtime=${options.pubTime}&title=${options.title}&article=${options.article}`,
+        url: `../detail/detail?author=${options.author}&pubtime=${options.pubtime}&title=${options.detailtitle}&article=${options.article}`,
       });
     }
 
-
-   
     wx.setStorageSync('curDetailType', this.data.detailType);
 
     this.getRss(this.data.rssUrl);
@@ -119,6 +132,22 @@ Page({
         var rssData = dataJson.rss.channel;//.channel.item.slice(0, 50);
         console.log('rssdata:', rssData);
 
+        wx.setStorageSync('rssData', rssData);
+
+        //判断是否是从分享页跳转过来的
+        if( that.data.fromsharedetailurl.length != 0){
+          console.log("fromsharedetailurl", that.data.fromsharedetailurl)
+          var findid = -1;
+          for (i = 0; i < rssData.item.length; i++) {
+            if (rssData.item[i].link.text == that.data.fromsharedetailurl) {
+              wx.navigateTo({
+                url: `../detail/detail?id=${i}&url=`,
+              });
+              break;
+            }
+          }
+        }
+
         const {description, link, lastBuildDate = '', copyright = '', pubDate = '',image='' } = rssData;
         var author = description.text || '' ;
 
@@ -136,8 +165,6 @@ Page({
 
         wx.hideLoading();
         wx.stopPullDownRefresh();
-
-        wx.setStorageSync('rssData', rssData);
       }
     });
     

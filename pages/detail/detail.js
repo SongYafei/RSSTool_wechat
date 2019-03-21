@@ -46,7 +46,7 @@ Page({
       if( options.article ){
 
         this.setData({
-          article: options.article,
+          article: decodeURIComponent(options.article) ,
           title: options.title,
           pubTime: options.pubtime,
           author: options.author,
@@ -69,6 +69,7 @@ Page({
           title: rssDataItem.title.text,
           pubTime: rssDataItem.pubDate.text,
           author: author.text,
+          linkurl:rssDataItem.link.text,
         })
       }
 
@@ -264,15 +265,14 @@ Page({
 
     const rssUrl = wx.getStorageSync('curRssUrl');
     const detailType = wx.getStorageSync('curDetailType');
-    var dstPath = `/pages/index/index?url=${that.data.linkurl}&rssUrl=${rssUrl}`;
+    var dstPath = `/pages/index/index?url=${encodeURIComponent(that.data.linkurl)}&rssUrl=${encodeURIComponent(rssUrl)}`;
     if (detailType == 'description'
       || detailType == 'content:encoded') {
       
-    //  dstPath = `/pages/index/index?rssUrl=${rssUrl}&author=${that.data.author}&pubtime=${that.data.pubTime}&detailtitle=${that.data.title}&article='${that.data.article}'`;
-      dstPath='';
+      dstPath = `/pages/index/index?rssUrl=${encodeURIComponent(rssUrl)}&author=${that.data.author}&pubtime=${that.data.pubTime}&detailtitle=${that.data.title}&article='${encodeURIComponent(that.data.article)}'`;
     }
 
-    console.log('titile', that.data.sitetitle);
+    console.log('sharepath', dstPath);
     
     return {
       title: that.data.sitetitle,

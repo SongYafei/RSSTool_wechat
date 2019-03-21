@@ -52,7 +52,7 @@ Page({
        var launchPageInfo = rss.rssData[launchPage-1]
 
       wx.navigateTo({
-        url: `../index/index?rssUrl=${launchPageInfo.rssUrl}`,
+        url: `../index/index?rssUrl=${encodeURIComponent(launchPageInfo.rssUrl)}`,
       });
     }
 
@@ -122,7 +122,7 @@ Page({
     this.handleRssItemHideDelete();
 
     wx.navigateTo({
-      url: `../index/index?rssUrl=${rssUrl}`,
+      url: `../index/index?rssUrl=${encodeURIComponent(rssUrl)}`,
     });
   },
 
