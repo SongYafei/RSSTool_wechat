@@ -8,17 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    rssedData: [
-      {
-        title: 'cnBeta业界资讯',
-        link: 'https://www.cnbeta.com',
-        description: 'cnBeta业界新闻资讯',
-        favicon: '/res/cnbetalogo.png',
-        rssUrl: 'https://www.cnbeta.com/backend.php',
-        remark: '',
-        detail: 'crawl',
-      }
-    ],
+    rssedData: [],
     curSelectId: '', // 当前选中的源id
 
   },
